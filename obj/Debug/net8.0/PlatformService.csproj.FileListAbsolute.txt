@@ -1,5 +1,6 @@
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\appsettings.json
+C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\appsettings.Production.json
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\PlatformService.exe
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\PlatformService.deps.json
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\PlatformService.runtimeconfig.json
@@ -48,6 +49,7 @@ C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\Microsoft.OpenApi
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\RabbitMQ.Client.dll
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Yrkn\dotnet-24\s4\e3\PlatformService\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
