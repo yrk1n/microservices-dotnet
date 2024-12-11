@@ -24,7 +24,7 @@ public class EventProcessor : IEventProcessor
         switch (eventType)
         {
             case EventType.PlatformPublished:
-                //todo
+                AddPlatform(message);
                 break;
             default:
                 break;
@@ -55,15 +55,31 @@ public class EventProcessor : IEventProcessor
         {
             var repo = scope.ServiceProvider.GetRequiredService<ICommandRepo>();
 
-            var platformPublishedDto = JsonSerializer.Deserialize<PlatformPublishedDto>(platformPublishedMessage);
+            Console.WriteLine("--> Deserializing platform message...");
+            Console.WriteLine($"--> Raw message: {platformPublishedMessage}");
+
+            PlatformPublishedDto platformPublishedDto;
+            try
+            {
+                platformPublishedDto = JsonSerializer.Deserialize<PlatformPublishedDto>(platformPublishedMessage);
+                Console.WriteLine($"--> Platform DTO: {JsonSerializer.Serialize(platformPublishedDto)}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"--> Failed to deserialize message: {ex.Message}");
+                return;
+            }
 
             try
             {
                 var plat = _mapper.Map<Platform>(platformPublishedDto);
+                Console.WriteLine($"--> Mapped Platform: {JsonSerializer.Serialize(plat)}");
+
                 if (!repo.ExternalPlatformExists(plat.ExternalId))
                 {
                     repo.CreatePlatform(plat);
                     repo.SaveChanges();
+                    Console.WriteLine("--> Platform added!");
                 }
                 else
                 {
@@ -73,6 +89,7 @@ public class EventProcessor : IEventProcessor
             catch (Exception ex)
             {
                 Console.WriteLine($"--> Could not add Platform to DB {ex.Message}");
+                Console.WriteLine($"--> Stack trace: {ex.StackTrace}");
             }
         }
     }
