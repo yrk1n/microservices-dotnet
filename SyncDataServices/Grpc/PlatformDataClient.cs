@@ -20,7 +20,16 @@ public class PlatformDataClient : IPlatformDataClient
     {
         Console.WriteLine($"--> Calling GRPC Service {_configuration["GrpcPlatform"]}");
 
-        var channel = GrpcChannel.ForAddress(_configuration["GrpcPlatform"]);
+        var handler = new HttpClientHandler();
+        // Ignore SSL certificate validation for development
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
+        var channel = GrpcChannel.ForAddress(_configuration["GrpcPlatform"], new GrpcChannelOptions
+        {
+            HttpHandler = handler
+        });
+
         var client = new GrpcPlatform.GrpcPlatformClient(channel);
         var request = new GetAllRequest();
 

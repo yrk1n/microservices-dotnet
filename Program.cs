@@ -32,5 +32,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.MapControllers();
 
+PrepDb.PrepPopulation(app);
 
 app.Run();
