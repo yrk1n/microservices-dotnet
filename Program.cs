@@ -42,6 +42,19 @@ builder.Logging.AddSimpleConsole(options =>
 builder.Logging.AddFilter("Microsoft", LogLevel.Information);
 builder.Logging.AddFilter("System", LogLevel.Information);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+
+    options.ListenLocalhost(5214, o => o.Protocols =
+        Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1);
+
+    // HTTPS endpoint with HTTP/2 support for gRPC
+    options.ListenLocalhost(7293, listenOptions =>
+    {
+        listenOptions.UseHttps();
+        listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
+    });
+});
 Console.WriteLine($"--> CommandService Endpoint {builder.Configuration["CommandService"]}");
 
 var app = builder.Build();
@@ -55,6 +68,8 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
+
+
 app.MapControllers();
 app.MapGrpcService<GrpcPlatformService>();
 //serves the proto file to the client
@@ -66,5 +81,4 @@ app.MapGet("/protos/platforms.proto", async context =>
 PrepDb.PrepPopulation(app, env.IsProduction());
 
 app.Run();
-
 
